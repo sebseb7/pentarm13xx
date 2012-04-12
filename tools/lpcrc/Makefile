@@ -1,6 +1,6 @@
 CC = gcc
 LD = gcc
-LDFLAGS = -Wall -O4 -std=c99
+LDFLAGS = -Wall -O2 -std=c99
 EXES = lpcrc
 
 all: $(EXES)
