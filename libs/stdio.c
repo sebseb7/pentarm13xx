@@ -140,7 +140,6 @@ signed int PutUnsignedInt(
 
     return num;
 }
-
 //------------------------------------------------------------------------------
 // Writes a signed int inside the given string, using the provided fill & width
 // parameters.
@@ -215,6 +214,82 @@ signed int PutSignedInt(
 
     return num;
 }
+
+//------------------------------------------------------------------------------
+// Writes a signed long inside the given string, using the provided fill & width
+// parameters.
+// Returns the size of the written integer.
+// \param pStr  Storage string.
+// \param fill  Fill character.
+// \param width  Minimum integer width.
+// \param value  Signed integer value.
+//------------------------------------------------------------------------------
+signed int PutSignedLong(
+    char *pStr,
+    char fill,
+    signed int width,
+    int32_t value)
+{
+    signed int num = 0;
+    uint32_t absolute;
+
+    // Compute absolute value
+    if (value < 0) {
+
+        absolute = -value;
+    }
+    else {
+
+        absolute = value;
+    }
+
+    // Take current digit into account when calculating width
+    width--;
+
+    // Recursively write upper digits
+    if ((absolute / 10) > 0) {
+
+        if (value < 0) {
+        
+            num = PutSignedInt(pStr, fill, width, -(absolute / 10));
+        }
+        else {
+
+            num = PutSignedInt(pStr, fill, width, absolute / 10);
+        }
+        pStr += num;
+    }
+    else {
+
+        // Reserve space for sign
+        if (value < 0) {
+
+            width--;
+        }
+
+        // Write filler characters
+        while (width > 0) {
+
+            append_char(pStr, fill);
+            pStr++;
+            num++;
+            width--;
+        }
+
+        // Write sign
+        if (value < 0) {
+
+            num += append_char(pStr, '-');
+            pStr++;
+        }
+    }
+
+    // Write lower digit
+    num += append_char(pStr, (absolute % 10) + '0');
+
+    return num;
+}
+
 
 //------------------------------------------------------------------------------
 // Writes an hexadecimal value into a string, using the given fill, width &
@@ -352,6 +427,7 @@ signed int vsnprintf(char *pStr, size_t length, const char *pFormat, va_list ap)
             switch (*pFormat) {
             case 'd': 
             case 'i': num = PutSignedInt(pStr, fill, width, va_arg(ap, signed int)); break;
+            case 'l': num = PutSignedLong(pStr, fill, width, va_arg(ap, int32_t)); break;
             case 'u': num = PutUnsignedInt(pStr, fill, width, va_arg(ap, unsigned int)); break;
             case 'x': num = PutHexa(pStr, fill, width, 0, va_arg(ap, unsigned int)); break;
             case 'X': num = PutHexa(pStr, fill, width, 1, va_arg(ap, unsigned int)); break;

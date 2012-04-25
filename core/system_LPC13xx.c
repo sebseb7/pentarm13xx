@@ -145,15 +145,19 @@
 #define SYSPLLCTRL_Val        0x00000025
 #define MAINCLKSEL_Val        0x00000003
 
+// M:6 P:2(2x1)
+// M soll : 24
+//
+//
 // ******** Code Red *********
 // * Changed USBCLK_SETUP to 0
 // ***************************
 #define USBCLK_SETUP          0
 #define USBPLL_SETUP          0
 #define USBPLLCLKSEL_Val      0x00000001
-#define USBPLLCTRL_Val        0x00000003
+#define USBPLLCTRL_Val        0x00000003 // M :4; P :2
 #define SYSAHBCLKDIV_Val      0x00000001
-#define AHBCLKCTRL_Val        0x0001005F
+#define AHBCLKCTRL_Val        0x0001005F // 0x0001005F
 
 /*--------------------- Memory Mapping Configuration -------------------------
 //
@@ -443,6 +447,9 @@ void SystemInit (void)
   LPC_SYSCON->SYSPLLCTRL    = SYSPLLCTRL_Val;
   LPC_SYSCON->PDRUNCFG     &= ~(1 << 7);          /* Power-up SYSPLL          */
   while (!(LPC_SYSCON->SYSPLLSTAT & 0x01));	      /* Wait Until PLL Locked    */
+
+#warning clock_setup_ok
+
 #endif
 #endif
 #if (WDTOSC_SETUP)                                /* Watchdog Oscillator Setup*/
