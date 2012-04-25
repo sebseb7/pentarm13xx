@@ -27,7 +27,7 @@ int main(void) {
 	while (1) {
 		LPC_GPIO1->DATA = 0;
 		LPC_GPIO3->DATA = (1<<3)|(1<<2)|(1<<1)|(1<<0);
-		delay_ms(10);
+		delay_ms(100);
 		LPC_GPIO3->DATA = 0;
 		LPC_GPIO1->DATA = (1<<0);
 		delay_ms(300);	

@@ -69,6 +69,7 @@ clean:
 #########################################################################
 
 flash: firmware.bin
-	cp firmware.bin /Volumes/CRP\ DISABLD
-	sudo umount /Volumes/CRP\ DISABLD
+	cp firmware.bin /Volumes/CRP\ DISABLD/
+	sync
+	diskutil eject /dev/disk3
 
