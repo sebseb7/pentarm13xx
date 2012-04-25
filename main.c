@@ -28,6 +28,9 @@ int main(void) {
 	LPC_IOCON->R_PIO1_0  &= ~0x07;
 	LPC_IOCON->R_PIO1_0  |= 0x01;
 
+	LPC_GPIO0->DIR = (1<<2)|(1<<3)|(1<<7);
+	lcdInit();
+
 	while (1) {
 		LPC_GPIO1->DATA = 0;
 		LPC_GPIO3->DATA |= (1<<0);
@@ -36,6 +39,7 @@ int main(void) {
 		LPC_GPIO3->DATA &= ~(1<<0);
 		delay_ms(300);	
 	
+		lcdFillRGB(0,200,0);
 
 //		LPC_UART->IER = IER_THRE | IER_RLS;			/* Disable RBR */
 		uint8_t cmd1[] = {1,2,3}; 
