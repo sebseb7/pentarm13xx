@@ -22,7 +22,7 @@ int main(void) {
 	
 	UARTInit(115200);
 
-	LPC_GPIO1->DIR = (1<<0);	
+	LPC_GPIO1->DIR = (1<<11);	
 	LPC_GPIO3->DIR = (1<<0);	
 	//disable JTAG on 1_0
 	LPC_IOCON->R_PIO1_0  &= ~0x07;
@@ -35,7 +35,7 @@ int main(void) {
 		LPC_GPIO1->DATA = 0;
 		LPC_GPIO3->DATA |= (1<<0);
 		delay_ms(100);
-		LPC_GPIO1->DATA = (1<<0);
+		LPC_GPIO1->DATA = (1<<11);
 		LPC_GPIO3->DATA &= ~(1<<0);
 		delay_ms(300);	
 	
