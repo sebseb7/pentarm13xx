@@ -14,7 +14,7 @@ small dev-board using an NXP LPC1343
 * 4 32Bit PWM pins
 * 3 ADC pins
 * 18 GPIO pins
-* Powered from USB or 3.3V supply
+* Powered from USB, 5V or 3.3V supply
 * 2 LEDs
 * 2 Buttons
 
