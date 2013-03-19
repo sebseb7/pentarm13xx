@@ -20,6 +20,6 @@ small dev-board using an NXP LPC1343
 
 look for pentstm32f4 if you need a more powerful dev board
 
-![top](/sebseb7/pentarm13xx/raw/master/top.png)
-![bottom](/sebseb7/pentarm13xx/raw/master/bottom.png)
+![top](https://raw.github.com/sebseb7/pentarm13xx/master/top.png)
+![bottom](https://raw.github.com/sebseb7/pentarm13xx/master/bottom.png)
 
